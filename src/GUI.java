@@ -1,51 +1,43 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class GUI extends JFrame{
+public class GUI extends JPanel{
+
+    private final int HEIGHT = 600;
+    private final int WIDTH = 600;
 
     public JTextField singleCommandField = new JTextField("Type command:");
     public JTextArea multipleCommandsField = new JTextArea("Type commands:");
-    public JPanel outputArea = new JPanel();
+    public JPanel outputArea = new JPanel(new BorderLayout());
 
     public GUI(){
+        //setting layout and border gaps for main panel
+        setBorder(new EmptyBorder(35,100,35,100));
+        setLayout(new FlowLayout(FlowLayout.CENTER, 30 ,0));
 
-        //Settings for frame window
-        setSize(1280, 720);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setTitle("Programming Language Environment");
+        //creating another panel for textboxes
+        JPanel sidePanel = new JPanel(new BorderLayout());
+        sidePanel.setPreferredSize(new Dimension((WIDTH/2),HEIGHT));
 
-        //Defining layout
-        setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        //Single line command field
-        gbc.gridx = 0; gbc.gridy = 0;
-        gbc.gridheight = 1; gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        add(singleCommandField, gbc);
-
-        //Multiple lines commands field
-        gbc.gridx = 0; gbc.gridy = 1;
-        gbc.gridheight = 1; gbc.gridwidth = 1;
-        gbc.ipady = 500; gbc.ipadx = 300;
-        gbc.insets = new Insets(30,0,0,0);
-        JPanel textArea = new JPanel();
-        textArea.setLayout(new BorderLayout());
+        //making bigger textbox scrollable
+        JPanel textArea = new JPanel(new BorderLayout());
         JScrollPane scroll = new JScrollPane(multipleCommandsField);
+        multipleCommandsField.setPreferredSize(new Dimension((WIDTH/2), (HEIGHT-50)));
         textArea.add(scroll, BorderLayout.CENTER);
-        add(textArea, gbc);
 
-        //Output area
-        gbc.gridx = 1; gbc.gridy = 0;
-        gbc.gridheight = 2; gbc.gridwidth = 1;
-        gbc.fill = GridBagConstraints.VERTICAL;
-        gbc.ipadx = 600;
-        gbc.insets = new Insets(0,50,0,0);
+        //adding textboxes to side panel
+        sidePanel.add(singleCommandField, BorderLayout.NORTH);
+        sidePanel.add(multipleCommandsField, BorderLayout.SOUTH);
+
+        //configuring size of output area
+        outputArea.setPreferredSize(new Dimension(WIDTH,HEIGHT));
         outputArea.setBackground(Color.gray);
-        add(outputArea, gbc);
 
-        //End of frame
-        setVisible(true);
+        //adding both panels to main panel
+        add(sidePanel);
+        add(outputArea);
+
     }
+
 }
