@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class GUI extends JPanel{
 
@@ -9,7 +10,10 @@ public class GUI extends JPanel{
 
     public JTextField singleCommandField = new JTextField("Type command:");
     public JTextArea multipleCommandsField = new JTextArea("Type commands:");
+    public JButton runButton = new JButton("Run");
     public JPanel outputArea = new JPanel(new BorderLayout());
+    public BufferedImage canvas = new BufferedImage((HEIGHT-50), (WIDTH-50), BufferedImage.TYPE_INT_RGB);
+    public JLabel canvasView = new JLabel(new ImageIcon(canvas));
 
     public GUI(){
         //setting layout and border gaps for main panel
@@ -28,11 +32,13 @@ public class GUI extends JPanel{
 
         //adding textboxes to side panel
         sidePanel.add(singleCommandField, BorderLayout.NORTH);
-        sidePanel.add(multipleCommandsField, BorderLayout.SOUTH);
+        sidePanel.add(multipleCommandsField, BorderLayout.CENTER);
+        sidePanel.add(runButton,BorderLayout.SOUTH);
 
         //configuring size of output area
+        outputArea.setBackground(Color.BLACK);
         outputArea.setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        outputArea.setBackground(Color.gray);
+        outputArea.add(canvasView, BorderLayout.CENTER);
 
         //adding both panels to main panel
         add(sidePanel);
