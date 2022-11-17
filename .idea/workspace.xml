@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="creating shapes">
+    <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="creating tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProgrammingLanguageEnvironment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProgrammingLanguageEnvironment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyCanvas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyCanvasTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyCanvasTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +16,7 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -85,13 +85,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MyCanvasTest.TestInvalidParameter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProgrammingLanguageEnvironment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MyCanvasTest" />
+      <option name="METHOD_NAME" value="TestInvalidParameter" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MyCanvasTest.TestNotEnoughArgs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProgrammingLanguageEnvironment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MyCanvasTest" />
+      <option name="METHOD_NAME" value="TestNotEnoughArgs" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.MyCanvasTest" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.MyCanvasTest.TestNotEnoughArgs" />
+        <item itemvalue="JUnit.MyCanvasTest.TestInvalidParameter" />
+        <item itemvalue="JUnit.MyCanvasTest" />
       </list>
     </recent_temporary>
   </component>
@@ -117,6 +137,7 @@
       <workItem from="1668515681433" duration="4118000" />
       <workItem from="1668596287698" duration="567000" />
       <workItem from="1668620176862" duration="7211000" />
+      <workItem from="1668672865773" duration="1356000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1668005312076</created>
@@ -142,7 +163,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="creating-tests" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -158,6 +179,10 @@
     <MESSAGE value="First commit" />
     <MESSAGE value="Updating gui's layout" />
     <MESSAGE value="creating shapes" />
-    <option name="LAST_COMMIT_MESSAGE" value="creating shapes" />
+    <MESSAGE value="creating tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating tests" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ProgrammingLanguageEnvironment$MyCanvasTest.ic" NAME="MyCanvasTest Coverage Results" MODIFIED="1668673915624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
