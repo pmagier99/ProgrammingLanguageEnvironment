@@ -3,9 +3,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+
+/**
+ * A public class that is used to <strong>Load file</strong>
+ * The file is then read and split according the new lines,
+ * and finally concatenated to <strong>output</strong> string,
+ * along with inserting a new line when needed.
+ */
 public class LoadFile {
     String output = "";
-
     public LoadFile(){
         try{
             JFileChooser fileChooser = new JFileChooser();
@@ -23,6 +29,11 @@ public class LoadFile {
             throw new RuntimeException(e);
         }
     }
+
+/**
+ * Returns the <strong>output</strong> string
+ * @return the String of whatever is in the <strong>Loaded file</strong>
+ */
 
 public String printText(){
         return output;

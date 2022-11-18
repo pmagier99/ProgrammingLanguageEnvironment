@@ -1,3 +1,8 @@
+/**
+ * A public class that reads the input from the user,
+ * then it reads and split it into command and parameters,
+ * and finally execute them.
+ */
 public class Parser{
 
     String command; //stores a command name
@@ -5,10 +10,20 @@ public class Parser{
     int[] numbersParameters; //stores number parameters
     int actualLength; //used to check number of parameters
     MyCanvas canvas; //used to import all commands to draw
+
+    /**
+     * A class constructor.
+     * @param canvas the canvas from which drawn and non-drawn are taken
+     */
     public Parser(MyCanvas canvas){
         this.canvas = canvas;
     }
 
+    /**
+     * Reads a given command, splits it and then execute it.
+     * @param fullCommand the user input from text-box
+     * @throws ApplicationException used if given command does not exist
+     */
     public void parseCommand(String fullCommand) throws ApplicationException {
         splitCommand(fullCommand);
 
@@ -55,6 +70,11 @@ public class Parser{
 
      }
 
+    /**
+     * Splits a command into command name and parameters
+     * @param fullCommand the user input from text-box
+     * @throws ApplicationException used if any of the parameter is invalid
+     */
      private void splitCommand(String fullCommand) throws ApplicationException {
         String[] strArray = fullCommand.split(" "); //split command into array by space
         command = strArray[0].toLowerCase(); //first element of array is command name
@@ -78,11 +98,14 @@ public class Parser{
                  }
              }
          }
-
-
-
      }
 
+    /**
+     * Reads a multiline textbox, splits all the line into commands,
+     * and then execute them.
+     * @param multiCommands the user input from big text-box
+     * @throws ApplicationException
+     */
      public void parseMultiCommands(String multiCommands) throws ApplicationException {
          String[] lines = multiCommands.split("\\r?\\n");
          for(String c : lines){
@@ -90,6 +113,12 @@ public class Parser{
          }
      }
 
+    /**
+     * Checks if number of parameters is correct
+     * @param parametersExpected the number of expected parameters
+     * @param actualLength the actual number of paremeters
+     * @throws ApplicationException used if the number of parameters is either not enough or too big.
+     */
      private void checkNumberOfParameters(int parametersExpected, int actualLength) throws ApplicationException{
         if(parametersExpected > actualLength) throw new ApplicationException("Not enough parameters");
         if(parametersExpected < actualLength) throw new ApplicationException("Too many parameters");

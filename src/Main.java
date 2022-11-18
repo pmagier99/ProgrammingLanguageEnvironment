@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.util.Objects;
 
+
 public class Main {
     public static GUI gui = new GUI();
     static MyCanvas canvas = new MyCanvas(gui.canvasView, gui.canvas.getGraphics());

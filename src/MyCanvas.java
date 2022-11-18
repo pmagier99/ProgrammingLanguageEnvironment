@@ -1,6 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A public class that implements a <strong>Commands</strong> for
+ * non drawing activities.
+ * Also, it contains methods for drawing activities.
+ */
+
 public class MyCanvas implements Commands{
 
     int xPos; int yPos;
@@ -9,30 +15,55 @@ public class MyCanvas implements Commands{
     Graphics g;
     JLabel view;
     Cursor cursor;
+
+    /**
+     * Creates a new Canvas on the provided <strong>JLabel</strong>
+     * @param view - the JLabel that display graphics
+     * @param g - Graphics g
+     */
     public MyCanvas(JLabel view, Graphics g){
         this.g = g;
         this.view = view;
         xPos = 0; yPos = 0;
         cursor = new Cursor(g, 0, 0);
     }
+
+    /**
+     * Draws rectangle with the specified parameters
+     * @param width value of the width
+     * @param height value of the height
+     */
     public void drawRectangle(int width, int height){
         g.setColor(c);
         new Rectangle(g, xPos, yPos, width, height, fill);
         view.repaint();
     }
 
+    /**
+     * Draws triangle with the specified parameter
+     * @param size value of the size
+     */
     public void drawTriangle(int size){
         g.setColor(c);
         new Triangle(g, xPos, yPos, size, fill);
         view.repaint();
     }
 
+    /**
+     * Draws oval with the specified parameter
+     * @param size value of the size
+     */
     public void drawOval(int size){
         g.setColor(c);
         new Oval(g, xPos, yPos, size, fill);
         view.repaint();
     }
 
+    /**
+     * Draws line with the specified parameters
+     * @param xTo value of <strong>X</strong> where line should end
+     * @param yTo value of <strong>Y</strong> where line should end
+     */
     public void drawLine(int xTo, int yTo){
         g.setColor(c);
         new Line(g, xPos, yPos, xTo, yTo);
@@ -41,6 +72,11 @@ public class MyCanvas implements Commands{
         view.repaint();
     }
 
+    /**
+     * Sets the value of <strong>fill</strong> to either
+     * true or false.
+     * @param fill <strong>on/off</strong>
+     */
     @Override
     public void setFill(String fill) {
         g.setColor(c);
@@ -51,6 +87,10 @@ public class MyCanvas implements Commands{
         }
     }
 
+    /**
+     * Sets the value of <strong>Color</strong>
+     * @param colour the string name of Colour
+     */
     @Override
     public void setColour(String colour) {
         switch (colour) {
@@ -68,6 +108,11 @@ public class MyCanvas implements Commands{
                 break;
         }
     }
+
+    /**
+     * Clears the entire canvas, but keeps the position
+     * of cursor
+     */
     @Override
     public void clear() {
         g.clearRect(0,0,550,550);
@@ -75,6 +120,10 @@ public class MyCanvas implements Commands{
         view.repaint();
     }
 
+    /**
+     * Resets the position of cursor
+     * to 0,0
+     */
     @Override
     public void reset() {
         cursor.moveCursor(g, xPos, yPos, 0, 0);
