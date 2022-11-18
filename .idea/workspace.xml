@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="creating tests">
+    <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="creating nondrawing commands">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProgrammingLanguageEnvironment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ProgrammingLanguageEnvironment.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyCanvas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyCanvasTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyCanvasTest.java" afterDir="false" />
     </list>
@@ -68,7 +72,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MyCanvasTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ProgrammingLanguageEnvironment" />
@@ -85,6 +89,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="MyCanvasTest.TestCaseSensitivity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProgrammingLanguageEnvironment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="MyCanvasTest" />
+      <option name="METHOD_NAME" value="TestCaseSensitivity" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MyCanvasTest.TestInvalidParameter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProgrammingLanguageEnvironment" />
       <option name="PACKAGE_NAME" value="" />
@@ -95,11 +109,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyCanvasTest.TestNotEnoughArgs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MyCanvasTest.TestParseCommandMoveToValid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProgrammingLanguageEnvironment" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="MyCanvasTest" />
-      <option name="METHOD_NAME" value="TestNotEnoughArgs" />
+      <option name="METHOD_NAME" value="TestParseCommandMoveToValid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -107,11 +121,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MyCanvasTest" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.MyCanvasTest.TestNotEnoughArgs" />
-        <item itemvalue="JUnit.MyCanvasTest.TestInvalidParameter" />
+        <item itemvalue="JUnit.MyCanvasTest.TestParseCommandMoveToValid" />
         <item itemvalue="JUnit.MyCanvasTest" />
+        <item itemvalue="JUnit.MyCanvasTest.TestInvalidParameter" />
+        <item itemvalue="JUnit.MyCanvasTest.TestCaseSensitivity" />
       </list>
     </recent_temporary>
   </component>
@@ -138,6 +152,9 @@
       <workItem from="1668596287698" duration="567000" />
       <workItem from="1668620176862" duration="7211000" />
       <workItem from="1668672865773" duration="1356000" />
+      <workItem from="1668689264162" duration="11629000" />
+      <workItem from="1668764022610" duration="4483000" />
+      <workItem from="1668770610273" duration="4743000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1668005312076</created>
@@ -157,19 +174,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -181,6 +186,16 @@
     <MESSAGE value="creating shapes" />
     <MESSAGE value="creating tests" />
     <option name="LAST_COMMIT_MESSAGE" value="creating tests" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ProgrammingLanguageEnvironment$MyCanvasTest.ic" NAME="MyCanvasTest Coverage Results" MODIFIED="1668673915624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
