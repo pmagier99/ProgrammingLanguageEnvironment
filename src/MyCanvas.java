@@ -78,6 +78,7 @@ public class MyCanvas implements Commands{
     @Override
     public void reset() {
         cursor.moveCursor(g, xPos, yPos, 0, 0);
+        view.repaint();
         xPos = 0; yPos = 0;
     }
 
