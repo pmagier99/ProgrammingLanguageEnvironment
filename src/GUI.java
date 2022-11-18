@@ -3,6 +3,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * A public class that extends JPanel.
+ * It is used to create a JPanel that then further is added
+ * to JFrame in Main class.
+ */
 public class GUI extends JPanel{
 
     public final int HEIGHT = 600;
@@ -15,6 +20,9 @@ public class GUI extends JPanel{
     public BufferedImage canvas = new BufferedImage((HEIGHT-50), (WIDTH-50), BufferedImage.TYPE_INT_RGB);
     public JLabel canvasView = new JLabel(new ImageIcon(canvas));
 
+    /**
+     * GUI class constructor that render entire User Interface
+     */
     public GUI(){
         //setting layout and border gaps for main panel
         setBorder(new EmptyBorder(35,100,35,100));

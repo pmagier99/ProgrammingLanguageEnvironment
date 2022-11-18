@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MyCanvasTest {
+class TestClass {
 
     GUI gui = new GUI();
     MyCanvas canvas = new MyCanvas(gui.canvasView, gui.canvas.getGraphics());
