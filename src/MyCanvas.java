@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MyCanvas extends Canvas implements Commands{
+public class MyCanvas implements Commands{
 
-    int xPos = 0; int yPos = 0;
+    int xPos; int yPos;
     boolean fill;
     Color c;
     Graphics g;
@@ -12,24 +12,29 @@ public class MyCanvas extends Canvas implements Commands{
     public MyCanvas(JLabel view, Graphics g){
         this.g = g;
         this.view = view;
+        xPos = 0; yPos = 0;
         cursor = new Cursor(g, 0, 0);
     }
     public void drawRectangle(int width, int height){
+        g.setColor(c);
         new Rectangle(g, xPos, yPos, width, height, fill);
         view.repaint();
     }
 
     public void drawTriangle(int size){
+        g.setColor(c);
         new Triangle(g, xPos, yPos, size, fill);
         view.repaint();
     }
 
     public void drawOval(int size){
+        g.setColor(c);
         new Oval(g, xPos, yPos, size, fill);
         view.repaint();
     }
 
     public void drawLine(int xTo, int yTo){
+        g.setColor(c);
         new Line(g, xPos, yPos, xTo, yTo);
         cursor.moveCursor(g, xPos, yPos, xTo, yTo);
         xPos = xTo; yPos = yTo;
@@ -37,18 +42,37 @@ public class MyCanvas extends Canvas implements Commands{
     }
 
     @Override
-    public void setFill(boolean fill) {
-        this.fill = fill;
+    public void setFill(String fill) {
+        g.setColor(c);
+        if(fill.equals("on")){
+            this.fill = true;
+        }else if(fill.equals("off")){
+            this.fill = false;
+        }
     }
 
     @Override
-    public void setColour(Color c) {
-        this.c = c;
+    public void setColour(String colour) {
+        switch (colour) {
+            case "red":
+                c = Color.red;
+                break;
+            case "yellow":
+                c = Color.yellow;
+                break;
+            case "blue":
+                c = Color.blue;
+                break;
+            case "greeen":
+                c = Color.green;
+                break;
+        }
     }
-
     @Override
-    public void clear(JLabel view, Graphics g) {
-        new MyCanvas(view, g);
+    public void clear() {
+        g.clearRect(0,0,550,550);
+        cursor.moveCursor(g, xPos, yPos, xPos, yPos);
+        view.repaint();
     }
 
     @Override
@@ -60,6 +84,7 @@ public class MyCanvas extends Canvas implements Commands{
     @Override
     public void moveTo(int x, int y) {
         cursor.moveCursor(g, xPos, yPos, x, y);
+        view.repaint();
         xPos = x; yPos = y;
     }
 }

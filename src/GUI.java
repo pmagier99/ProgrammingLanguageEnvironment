@@ -5,8 +5,8 @@ import java.awt.image.BufferedImage;
 
 public class GUI extends JPanel{
 
-    private final int HEIGHT = 600;
-    private final int WIDTH = 600;
+    public final int HEIGHT = 600;
+    public final int WIDTH = 600;
 
     public JTextField singleCommandField = new JTextField("Type command:");
     public JTextArea multipleCommandsField = new JTextArea("Type commands:");
@@ -39,6 +39,7 @@ public class GUI extends JPanel{
         outputArea.setBackground(Color.BLACK);
         outputArea.setPreferredSize(new Dimension(WIDTH,HEIGHT));
         outputArea.add(canvasView, BorderLayout.CENTER);
+
 
         //adding both panels to main panel
         add(sidePanel);

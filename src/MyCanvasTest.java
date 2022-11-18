@@ -5,20 +5,20 @@ import static org.junit.jupiter.api.Assertions.*;
 class MyCanvasTest {
 
     GUI gui = new GUI();
-    Parser p  = new Parser();
     MyCanvas canvas = new MyCanvas(gui.canvasView, gui.canvas.getGraphics());
+    Parser p  = new Parser(canvas);
     String errorMsg = "";
 
     @Test
-    void TestParseCommandMoveToValid() {
-        canvas.moveTo(100,100);
+    void TestParseCommandMoveToValid() throws ApplicationException {
+        p.parseCommand("moveto 100 100");
         assertEquals(canvas.xPos, 100);
         assertEquals(canvas.yPos, 100);
     }
 
     @Test
-    void TestParseCommandFillValid(){
-        canvas.setFill(true);
+    void TestParseCommandFillValid() throws ApplicationException {
+        p.parseCommand("fill on");
         assertTrue(canvas.fill);
     }
 
@@ -36,7 +36,7 @@ class MyCanvasTest {
         }catch(ApplicationException e){
             errorMsg = e.getMessage();
         }
-        assertEquals(errorMsg, "Too many arguments");
+        assertEquals(errorMsg, "Too many parameters");
     }
 
     @Test
@@ -52,24 +52,23 @@ class MyCanvasTest {
     @Test
     void TestNotEnoughArgs(){
         try{
-            p.parseCommand("rectangle 10");
+            p.parseCommand("rect 10");
         }catch (ApplicationException e){
             errorMsg = e.getMessage();
         }
-        assertEquals(errorMsg, "Not enough arguments");
+        assertEquals(errorMsg, "Not enough parameters");
     }
 
     @Test
     void TestInvalidParameter(){
         try{
-            p.parseCommand("circle 100 yellow");
+            p.parseCommand("circle 50 yellow");
+
         }catch (ApplicationException e){
             errorMsg = e.getMessage();
         }
 
         assertEquals(errorMsg, "Invalid parameter detected");
     }
-
-
 
 }
