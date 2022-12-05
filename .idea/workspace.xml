@@ -5,8 +5,15 @@
     <option name="CUSTOM_SCOPE_NAME" value="Selected files" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="creating commands parser">
+
+    <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="adding error messages to window app">
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyCanvas.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +79,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.TestClass">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ProgrammingLanguageEnvironment" />
@@ -121,6 +128,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestClass" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.TestClass" />
         <item itemvalue="JUnit.MyCanvasTest.TestCaseSensitivity" />
@@ -156,6 +164,7 @@
       <workItem from="1668764022610" duration="4483000" />
       <workItem from="1668770610273" duration="4743000" />
       <workItem from="1668777888990" duration="21572000" />
+      <workItem from="1670228709683" duration="451000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1668005312076</created>
@@ -213,7 +222,8 @@
     <MESSAGE value="creating shapes" />
     <MESSAGE value="creating tests" />
     <MESSAGE value="creating commands parser" />
-    <option name="LAST_COMMIT_MESSAGE" value="creating commands parser" />
+    <MESSAGE value="adding error messages to window app" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding error messages to window app" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ProgrammingLanguageEnvironment$MyCanvasTest.ic" NAME="MyCanvasTest Coverage Results" MODIFIED="1668673915624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -19,6 +19,7 @@ public class GUI extends JPanel{
     public JPanel outputArea = new JPanel(new BorderLayout());
     public BufferedImage canvas = new BufferedImage((HEIGHT-50), (WIDTH-50), BufferedImage.TYPE_INT_RGB);
     public JLabel canvasView = new JLabel(new ImageIcon(canvas));
+    public JLabel errorMessage = new JLabel("");
 
     /**
      * GUI class constructor that render entire User Interface
@@ -47,6 +48,12 @@ public class GUI extends JPanel{
         outputArea.setBackground(Color.BLACK);
         outputArea.setPreferredSize(new Dimension(WIDTH,HEIGHT));
         outputArea.add(canvasView, BorderLayout.CENTER);
+
+
+        //configuring error messages
+        errorMessage.setForeground(Color.red);
+        outputArea.add(errorMessage, BorderLayout.SOUTH);
+
 
 
         //adding both panels to main panel

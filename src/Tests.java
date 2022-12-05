@@ -8,7 +8,7 @@ class TestClass {
 
     GUI gui = new GUI();
     MyCanvas canvas = new MyCanvas(gui.canvasView, gui.canvas.getGraphics());
-    Parser p = new Parser(canvas);
+    Parser p  = new Parser(canvas, gui);
     String errorMsg = "";
 
     /**
@@ -55,7 +55,8 @@ class TestClass {
         } catch (ApplicationException e) {
             errorMsg = e.getMessage();
         }
-        assertEquals("Too many parameters", errorMsg);
+        assertEquals(errorMsg, "Too many parameters");
+        assertEquals(gui.errorMessage.getText(), "Error detected: The number of entered parameters is too large for this command");
     }
 
     /**
@@ -68,7 +69,8 @@ class TestClass {
         } catch (ApplicationException e) {
             errorMsg = e.getMessage();
         }
-        assertEquals("Invalid command", errorMsg);
+        assertEquals(errorMsg, "Invalid command");
+        assertEquals(gui.errorMessage.getText(), "Error detected: Entered command is not recognised");
     }
 
     /**
@@ -81,7 +83,8 @@ class TestClass {
         } catch (ApplicationException e) {
             errorMsg = e.getMessage();
         }
-        assertEquals("Not enough parameters", errorMsg);
+        assertEquals(errorMsg, "Not enough parameters");
+        assertEquals(gui.errorMessage.getText(), "Error detected: The number of entered parameters is not enough for this command");
     }
 
     /**
@@ -95,8 +98,8 @@ class TestClass {
         } catch (ApplicationException e) {
             errorMsg = e.getMessage();
         }
-
-        assertEquals("Invalid parameter detected", errorMsg);
+        assertEquals(errorMsg, "Invalid parameter detected");
+        assertEquals(gui.errorMessage.getText(), "Error detected: Entered parameter is not recognised");
     }
 }
     //PART TWO
@@ -159,3 +162,59 @@ class TestPartTwo{
 
 
 }
+//PART TWO
+
+//class TestPartTwo{
+//
+//    GUI gui = new GUI();
+//    MyCanvas canvas = new MyCanvas(gui.canvasView, gui.canvas.getGraphics());
+//    Parser p = new Parser(canvas);
+//    String errorMsg = "";
+//    /**
+//     * Test to check if created variable is valid number
+//     * @throws ApplicationException
+//     */
+//    @Test
+//    void TestVarInt() throws ApplicationException {
+//        p.parseCommand("var number = 20");
+//        Variable var = new Variable();
+//        int val = var.getValue();
+//
+//        assertEquals(20, val);
+//    }
+//
+//    /**
+//     * Test to check if created variable is valid String
+//     * @throws ApplicationException
+//     */
+//    @Test
+//    void TestVarString() throws ApplicationException{
+//        p.parseCommand("var string = yellow");
+//        Variable var = new Variable();
+//        String val = var.getValue();
+//
+//        assertEquals("yellow", val);
+//    }
+//
+//
+//    /**
+//     * Test to check if created loop successfully loops given tasks,
+//     * by adding 1 to <strong>var number</strong> everytime it loops
+//     * @throws ApplicationException
+//     */
+//    @Test
+//    void TestLoopCommand() throws ApplicationException{
+//        p.parseMultiCommands("var number = 0" +
+//                "var count = 1" +
+//                "While Count < 10" +
+//                "number = number + 1" +
+//                "count = count + 1" +
+//                "Endloop");
+//
+//        Variable var = new Variable();
+//        int val = var.getValue();
+//
+//        assertEquals(9, val);
+//    }
+//}
+
