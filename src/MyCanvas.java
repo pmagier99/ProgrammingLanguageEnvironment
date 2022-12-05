@@ -103,7 +103,7 @@ public class MyCanvas implements Commands{
             case "blue":
                 c = Color.blue;
                 break;
-            case "greeen":
+            case "green":
                 c = Color.green;
                 break;
         }

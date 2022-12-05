@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 /**
  * A public class that reads the input from the user,
  * then it reads and split it into command and parameters,
@@ -10,13 +12,17 @@ public class Parser{
     int[] numbersParameters; //stores number parameters
     int actualLength; //used to check number of parameters
     MyCanvas canvas; //used to import all commands to draw
+    GUI gui; //used to get the JLabel to display error messages
+
 
     /**
      * A class constructor.
      * @param canvas the canvas from which drawn and non-drawn are taken
+     * @param gui for getting the JLabel to display error messages
      */
-    public Parser(MyCanvas canvas){
+    public Parser(MyCanvas canvas, GUI gui){
         this.canvas = canvas;
+        this.gui = gui;
     }
 
     /**
@@ -26,6 +32,8 @@ public class Parser{
      */
     public void parseCommand(String fullCommand) throws ApplicationException {
         splitCommand(fullCommand);
+
+        if(!Objects.equals(gui.errorMessage.getText(), "")) gui.errorMessage.setText(""); //clear error message after entering correct one
 
         switch (command){
             case "rect":
@@ -65,6 +73,7 @@ public class Parser{
                 canvas.setColour(nonNumbersParameters[0]);
                 break;
             default:
+                gui.errorMessage.setText("Error detected: Entered command is not recognised");
                 throw new ApplicationException("Invalid command");
         }
 
@@ -85,7 +94,10 @@ public class Parser{
              nonNumbersParameters = new String[actualLength];
              for(int i = 1; i < strArray.length; i++){
                  nonNumbersParameters[i-1] = strArray[i];
-                 if(strArray[i].matches("[0-9]+")) throw new ApplicationException("Invalid parameter detected");
+                 if(strArray[i].matches("[0-9]+")){
+                     gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
+                     throw new ApplicationException("Invalid parameter detected");
+                 }
              }
 
          }else{
@@ -94,6 +106,7 @@ public class Parser{
                  try{
                      numbersParameters[i-1] = Integer.parseInt(strArray[i]);
                  }catch (Exception e){
+                     gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
                      throw new ApplicationException("Invalid parameter detected");
                  }
              }
@@ -104,7 +117,6 @@ public class Parser{
      * Reads a multiline textbox, splits all the line into commands,
      * and then execute them.
      * @param multiCommands the user input from big text-box
-     * @throws ApplicationException
      */
      public void parseMultiCommands(String multiCommands) throws ApplicationException {
          String[] lines = multiCommands.split("\\r?\\n");
@@ -119,13 +131,14 @@ public class Parser{
      * @param actualLength the actual number of paremeters
      * @throws ApplicationException used if the number of parameters is either not enough or too big.
      */
-     private void checkNumberOfParameters(int parametersExpected, int actualLength) throws ApplicationException{
-        if(parametersExpected > actualLength) throw new ApplicationException("Not enough parameters");
-        if(parametersExpected < actualLength) throw new ApplicationException("Too many parameters");
+     private void checkNumberOfParameters(int parametersExpected, int actualLength) throws ApplicationException {
+        if(parametersExpected > actualLength){
+            gui.errorMessage.setText("Error detected: The number of entered parameters is not enough for this command");
+            throw new ApplicationException("Not enough parameters");
+        }
+        if(parametersExpected < actualLength){
+            gui.errorMessage.setText("Error detected: The number of entered parameters is too large for this command");
+            throw new ApplicationException("Too many parameters");
+        }
      }
-
-
-
-
-
 }
