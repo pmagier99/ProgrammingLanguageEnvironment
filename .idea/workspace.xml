@@ -5,6 +5,7 @@
     <option name="CUSTOM_SCOPE_NAME" value="Selected files" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="adding error messages to window app">
       <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -12,6 +13,7 @@
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyCanvas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
+
       <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,6 +130,7 @@
       <list>
         <item itemvalue="JUnit.TestClass" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.TestClass" />
         <item itemvalue="JUnit.MyCanvasTest.TestCaseSensitivity" />
         <item itemvalue="JUnit.MyCanvasTest.TestTooManyArgs" />
         <item itemvalue="JUnit.MyCanvasTest.TestNotEnoughArgs" />
