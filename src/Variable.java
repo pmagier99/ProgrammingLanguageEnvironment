@@ -1,4 +1,3 @@
-
 public class Variable {
 
     String name;
@@ -16,5 +15,4 @@ public class Variable {
     public void setValue(String value){
         this.value = value;
     }
-
 }
