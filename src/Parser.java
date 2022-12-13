@@ -10,8 +10,12 @@ public class Parser{
     String command; //stores a command name
     MyCanvas canvas; //used to import all commands to draw
     GUI gui; //used to get the JLabel to display error messages
-    LinkedList<Variable> vars = new LinkedList<>();
-    LinkedList<String> params;
+    int currentLine = 0;
+    HashMap<Integer, String> lines = new HashMap<>();
+    List<Variable> vars = new ArrayList<>();
+    ArrayList<String> params;
+    Loop loop;
+
 
 
 
@@ -73,28 +77,41 @@ public class Parser{
                 break;
             case "var":
                 checkNumberOfParameters(3, params.size());
-                if(!checkIfVariableExists(params.get(0))){
-                    vars.add(new Variable(params.get(0), params.get(2)));
-                }else{
+                if(checkIfVariableExists(params.get(0))){
                     gui.errorMessage.setText("Error detected: This variable already exists");
                     throw new ApplicationException("Variable already exists");
+                }else{
+                    Variable newVar = new Variable(params.get(0));
+                    newVar.setValue(params.get(2));
+                    vars.add(newVar);
                 }
                 break;
-            default:
-
-                if(vars.size() > 0){
-                    for (Variable var : vars) {
-                        if (Objects.equals(var.name, command)) {
-                            var.value = params.get(1);
-                        }
+            case "while":
+                //checkIfParametersAreValid(true, 3);
+                loop = new Loop(new LinkedList<>());
+                for(int i = currentLine+1; i<lines.size(); i++){
+                    if(Objects.equals(lines.get(i), "endloop")){
+                        break;
+                    }else{
+                        loop.addCommand(lines.get(i));
                     }
+                }
+
+                parseWhile(loop.toString(), params.get(0), params.get(1), params.get(2));
+
+                break;
+            default:
+                if(checkIfVariableExists(command) ){
+                    int index = vars.indexOf(new Variable(command));
+                    Variable var = vars.get(index);
+                    vars.set(index, var.updateVariable(params.get(0), params.get(1)));
+
                 }else{
                     gui.errorMessage.setText("Error detected: Entered command is not recognised");
                     throw new ApplicationException("Invalid command");
                 }
 
         }
-
      }
 
     /**
@@ -102,9 +119,9 @@ public class Parser{
      * @param fullCommand the user input from text-box
      */
      private void splitCommand(String fullCommand) {
-        params = new LinkedList<>();
+        params = new ArrayList<>();
         params.addAll(Arrays.asList(fullCommand.split(" ")));
-        command = params.removeFirst();
+        command = params.remove(0).toLowerCase();
 
      }
 
@@ -114,9 +131,14 @@ public class Parser{
      * @param multiCommands the user input from big text-box
      */
      public void parseMultiCommands(String multiCommands) throws ApplicationException {
-         String[] lines = multiCommands.split("\\r?\\n");
-         for(String c : lines){
-             parseCommand(c);
+         String[] commands = multiCommands.split("\\r?\\n");
+         for(int i = 0; i < commands.length; i++){
+             lines.put(i, commands[i].toLowerCase());
+         }
+
+         while(currentLine < lines.size()){
+             parseCommand(lines.get(currentLine));
+             currentLine++;
          }
      }
 
@@ -133,49 +155,105 @@ public class Parser{
         }
         if(parametersExpected < actualLength){
             gui.errorMessage.setText("Error detected: The number of entered parameters is too large for this command");
-            throw new ApplicationException("Too many parameters");
+            throw new ApplicationException("Too many parameters" + currentLine);
         }
         return true;
      }
 
+    /**
+     * Checks if all provided parameters match with the requirements of commands.
+     * @param requireInt - boolean to decide if command requires number or not.
+     * @param parametersExpected - number of expected parameters in command
+     * @throws ApplicationException
+     */
      private void checkIfParametersAreValid(boolean requireInt, int parametersExpected) throws ApplicationException {
-         String first = params.getFirst();
-         String last = params.getLast();
+         if(parametersExpected == 0) return;
 
+         String first = params.get(0);
+         String last = params.get(params.size()-1);
 
-         if(checkNumberOfParameters(parametersExpected, params.size())){ //commands have correct amount of parameters;
+         checkNumberOfParameters(parametersExpected, params.size());
 
-             if(requireInt){ //commands needs integer
+         //converts any variables to its values
+         if(checkIfVariableExists(first)){
+            for(Variable var : vars){
+                if(Objects.equals(var.name, first)) params.set(0, var.value);
+            }
+         }
 
-                if(!(first.matches(("[0-9]+")) && last.matches("[0-9]+"))){ //checks if none of parameter is number
-                    if(vars.size() > 0){ //checks if there are any variables
-                        for(int i = 0; i < vars.size(); i++){
-                            if(!(Objects.equals(vars.get(i).name, first) && Objects.equals(vars.get(i).name, last))){ //checks if parameters is not variable
-                                gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
-                                throw new ApplicationException("Invalid parameter detected");
-                            }else{
-                                params.set(i, vars.get(i).getValue());//changes the name of variable into its value;
-                            }
-                        }
-                    }else{
-                        gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
-                        throw new ApplicationException("Invalid parameter detected");
-                    }
-                }//command can be performed
-
-             } else{ //commands does not need integer
-                 if(first.matches(("[0-9]+")) && last.matches("[0-9]+")){
-                     gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
-                     throw new ApplicationException("Invalid parameter detected");
-                 }
+         if(checkIfVariableExists(last)){
+             for(Variable var : vars){
+                 if(Objects.equals(var.name, last)) params.set(params.size()-1, var.value);
              }
          }
+         //end of converting
+
+         //after converting, it assigns new values;
+         first = params.get(0);
+         last = params.get(params.size()-1);
+
+         //does not require parameters and there is number parameter
+         if(!requireInt && first.matches(("[0-9]+")) && last.matches("[0-9]+")){
+             gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
+             throw new ApplicationException("Invalid parameter detected");
+         }
+
+         //require number and none of parameters are number
+         if(requireInt && !first.matches(("[0-9]+")) && !last.matches("[0-9]+")){
+             gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
+             throw new ApplicationException("Invalid parameter detected");
+         }
+
      }
 
      private boolean checkIfVariableExists(String name){
+         //return vars.contains(new Variable(name));
+
          for(Variable var : vars){
              if(Objects.equals(var.name, name)) return true;
          }
          return false;
+     }
+
+    private int toInt(String varname){
+         if(checkIfVariableExists(varname)){
+             return Integer.parseInt(vars.get(vars.indexOf(new Variable(varname))).value);
+         }
+
+         return Integer.parseInt(varname);
+    }
+
+     private void parseWhile(String multiCommands, String start, String operator, String end) throws ApplicationException {
+         String[] commands = multiCommands.split("\\r?\\n");
+         int S = toInt(start);
+         int E = toInt(end);
+
+         switch (operator){
+             case ">":
+                 while(S > E){
+                     for(String c : commands) parseCommand(c);
+                     S = toInt(start);
+                 }
+                 break;
+             case "<":
+                 while(S < E){
+                     for(String c : commands) parseCommand(c);
+                     S = toInt(start);
+                 }
+                 break;
+             case "<=":
+                 while(S <= E){
+                     for(String c : commands) parseCommand(c);
+                     S = toInt(start);
+                 }
+                 break;
+             case ">=":
+                 while(S >= E){
+                     for(String c : commands) parseCommand(c);
+                     S = toInt(start);
+                 }
+                 break;
+         }
+         currentLine+=loop.commands.size()+1;
      }
 }
