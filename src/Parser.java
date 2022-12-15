@@ -10,15 +10,12 @@ public class Parser{
     String command; //stores a command name
     MyCanvas canvas; //used to import all commands to draw
     GUI gui; //used to get the JLabel to display error messages
-    int currentLine = 0;
-    HashMap<Integer, String> lines = new HashMap<>();
-    List<Variable> vars = new ArrayList<>();
-    ArrayList<String> params;
-    Loop loop;
-
-
-
-
+    int currentLine = 0; //used to keep track of lines
+    HashMap<Integer, String> lines = new HashMap<>(); //stores all lines provided by the user
+    List<Variable> vars = new ArrayList<>(); // stores all variables created
+    ArrayList<String> params; // stores parameters of each command.
+    Loop loop; //instance of Loop
+    ifStatement ifStatement; //instance of if Statement
     /**
      * A class constructor.
      * @param canvas the canvas from which drawn and non-drawn are taken
@@ -87,7 +84,6 @@ public class Parser{
                 }
                 break;
             case "while":
-                //checkIfParametersAreValid(true, 3);
                 loop = new Loop(new LinkedList<>());
                 for(int i = currentLine+1; i<lines.size(); i++){
                     if(Objects.equals(lines.get(i), "endloop")){
@@ -99,6 +95,17 @@ public class Parser{
 
                 parseWhile(loop.toString(), params.get(0), params.get(1), params.get(2));
 
+                break;
+            case "if":
+                ifStatement = new ifStatement(new LinkedList<>());
+                for(int i = currentLine+1; i<lines.size(); i++){
+                    if(Objects.equals(lines.get(i), "endif")){
+                        break;
+                    }else{
+                        ifStatement.addCommand(lines.get(i));
+                    }
+                }
+                parseIfStatement(ifStatement.toString(), params.get(0));
                 break;
             default:
                 if(checkIfVariableExists(command) ){
@@ -155,7 +162,7 @@ public class Parser{
         }
         if(parametersExpected < actualLength){
             gui.errorMessage.setText("Error detected: The number of entered parameters is too large for this command");
-            throw new ApplicationException("Too many parameters" + currentLine);
+            throw new ApplicationException("Too many parameters");
         }
         return true;
      }
@@ -206,6 +213,12 @@ public class Parser{
 
      }
 
+    /**
+     * Private function that checks if provided String name is also a name of existed variable
+     * @param name - name of Variable that needs to be checked for existence
+     * @return true if exists, false if it does not
+     */
+
      private boolean checkIfVariableExists(String name){
          //return vars.contains(new Variable(name));
 
@@ -215,14 +228,64 @@ public class Parser{
          return false;
      }
 
-    private int toInt(String varname){
+    /**
+     * Private function that return int value of variable with provided name,
+     * @param varname - name of variable that needs to converted to integer
+     * @return the Integer from variable.
+     */
+    private int toInt(String varname) throws ApplicationException {
          if(checkIfVariableExists(varname)){
-             return Integer.parseInt(vars.get(vars.indexOf(new Variable(varname))).value);
+
+             try{
+                 return Integer.parseInt(vars.get(vars.indexOf(new Variable(varname))).value);
+             }catch (NumberFormatException e){
+                 gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
+                 throw new ApplicationException("Invalid parameter detected");
+             }
          }
 
          return Integer.parseInt(varname);
     }
 
+    /**
+     * Private function to perform if Statement created by user in program.
+     * @param multiCommands - list of commands that needs to be executed if condition is true
+     * @param condition - condition that needs to be true in order to perform provided commands
+     * @throws ApplicationException
+     */
+    private void parseIfStatement(String multiCommands, String condition) throws ApplicationException {
+        String[] commands = multiCommands.split("\\r?\\n");
+        String[] parameters = {"",""};
+        int parametersIndex = 0;
+        String operator = "";
+        for(int i = 0; i < condition.length(); i++){
+            char ch = condition.charAt(i);
+                if(ch != '<' && ch != '>' && ch != '=' ){
+                    parameters[parametersIndex] += ch;
+                }else {
+                    operator += ch;
+                    if(operator.length() == 1) parametersIndex++;
+                }
+        }
+
+        //converts parameters to int, even if they are variable
+        int parameter1 = toInt(parameters[0]);
+        int parameter2 = toInt(parameters[1]);
+
+        if(ifStatement.checkCondition(parameter1, parameter2, operator)){
+            for(String c : commands) parseCommand(c);
+        }
+        currentLine+=ifStatement.commands.size()+1;
+    }
+
+    /**
+     * Private function that executes provided commands as many times as it is provided by the user in condition
+     * @param multiCommands- list of commands that needs to be executed if condition is true
+     * @param start - beginning of the loop
+     * @param operator - to specify condition that needs to met to run loop
+     * @param end - end of loop
+     * @throws ApplicationException
+     */
      private void parseWhile(String multiCommands, String start, String operator, String end) throws ApplicationException {
          String[] commands = multiCommands.split("\\r?\\n");
          int S = toInt(start);
