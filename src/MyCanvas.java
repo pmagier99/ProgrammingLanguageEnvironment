@@ -137,4 +137,10 @@ public class MyCanvas implements Commands{
         view.repaint();
         xPos = x; yPos = y;
     }
+
+    public void printError(String error){
+        g.setFont(g.getFont().deriveFont(12f));
+        g.drawString(error,20 ,yPos);
+        view.repaint();
+    }
 }
