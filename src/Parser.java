@@ -76,8 +76,8 @@ public class Parser{
             case "var":
                 checkNumberOfParameters(3, params.size());
                 if(checkIfVariableExists(params.get(0))){
-                    gui.errorMessage.setText("Error detected: This variable already exists");
-                    throw new ApplicationException("Variable already exists");
+                    gui.errorMessage.setText("Error detected: This variable already exists. Line:" + currentLine);
+                    throw new ApplicationException("Variable already exists. Line:" + currentLine);
                 }else{
                     Variable newVar = new Variable(params.get(0));
                     newVar.setValue(params.get(2));
@@ -110,8 +110,8 @@ public class Parser{
                 break;
             case "method":
                 if(checkIfMethodExists(params.get(0))){
-                    gui.errorMessage.setText("Error detected: This method already exists");
-                    throw new ApplicationException("Method already exists");
+                    gui.errorMessage.setText("Error detected: This method already exists. Line:" + currentLine);
+                    throw new ApplicationException("Method already exists. Line:" + currentLine);
                 }else{
                     Method newMethod = new Method(params.get(0));
                     methods.add(newMethod);
@@ -132,6 +132,10 @@ public class Parser{
                     currentLine+=newMethod.commands.size()+1;
                     break;
                 }
+            case "endif":
+            case "endloop":
+            case "endmethod":
+                break;
             default:
                 if(checkIfVariableExists(command) ){
                     int index = vars.indexOf(new Variable(command));
@@ -145,8 +149,8 @@ public class Parser{
                     parseMethod(method);
 
                 }else{
-                    gui.errorMessage.setText("Error detected: Entered command is not recognised");
-                    throw new ApplicationException("Invalid command");
+                    gui.errorMessage.setText("Error detected: Entered command is not recognised. Line:" + currentLine);
+                    throw new ApplicationException("Invalid command. Line:" + currentLine);
                 }
 
         }
@@ -169,6 +173,9 @@ public class Parser{
      * @param multiCommands the user input from big text-box
      */
      public void parseMultiCommands(String multiCommands) throws ApplicationException {
+         SyntaxChecker sc = new SyntaxChecker(canvas, gui);
+         if(!sc.check(multiCommands)) return;
+
          String[] commands = multiCommands.split("\\r?\\n");
          for(int i = 0; i < commands.length; i++){
              lines.put(i, commands[i].toLowerCase());
@@ -188,12 +195,12 @@ public class Parser{
      */
      private boolean checkNumberOfParameters(int parametersExpected, int actualLength) throws ApplicationException {
         if(parametersExpected > actualLength){
-            gui.errorMessage.setText("Error detected: The number of entered parameters is not enough for this command");
-            throw new ApplicationException("Not enough parameters");
+            gui.errorMessage.setText("Error detected: The number of entered parameters is not enough for this command. Line:" + currentLine);
+            throw new ApplicationException("Not enough parameters. Line:" + currentLine);
         }
         if(parametersExpected < actualLength){
-            gui.errorMessage.setText("Error detected: The number of entered parameters is too large for this command");
-            throw new ApplicationException("Too many parameters");
+            gui.errorMessage.setText("Error detected: The number of entered parameters is too large for this command. Line:" + currentLine);
+            throw new ApplicationException("Too many parameters. Line:" + currentLine);
         }
         return true;
      }
@@ -232,14 +239,14 @@ public class Parser{
 
          //does not require parameters and there is number parameter
          if(!requireInt && first.matches(("[0-9]+")) && last.matches("[0-9]+")){
-             gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
-             throw new ApplicationException("Invalid parameter detected");
+             gui.errorMessage.setText("Error detected: Entered parameter is not recognised. Line:" + currentLine);
+             throw new ApplicationException("Invalid parameter detected. Line:" + currentLine);
          }
 
          //require number and none of parameters are number
          if(requireInt && !first.matches(("[0-9]+")) && !last.matches("[0-9]+")){
-             gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
-             throw new ApplicationException("Invalid parameter detected");
+             gui.errorMessage.setText("Error detected: Entered parameter is not recognised. Line:" + currentLine);
+             throw new ApplicationException("Invalid parameter detected. Line:" + currentLine);
          }
 
      }
@@ -276,8 +283,8 @@ public class Parser{
              try{
                  return Integer.parseInt(vars.get(vars.indexOf(new Variable(varname))).value);
              }catch (NumberFormatException e){
-                 gui.errorMessage.setText("Error detected: Entered parameter is not recognised");
-                 throw new ApplicationException("Invalid parameter detected");
+                 gui.errorMessage.setText("Error detected: Entered parameter is not recognised. Line:" + currentLine);
+                 throw new ApplicationException("Invalid parameter detected. Line:" + currentLine);
              }
          }
 
