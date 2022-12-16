@@ -16,6 +16,7 @@ public class Parser{
     ArrayList<String> params; // stores parameters of each command.
     Loop loop; //instance of Loop
     ifStatement ifStatement; //instance of if Statement
+    List<Method> methods = new ArrayList<>(); //stores all methods created
     /**
      * A class constructor.
      * @param canvas the canvas from which drawn and non-drawn are taken
@@ -107,11 +108,41 @@ public class Parser{
                 }
                 parseIfStatement(ifStatement.toString(), params.get(0));
                 break;
+            case "method":
+                if(checkIfMethodExists(params.get(0))){
+                    gui.errorMessage.setText("Error detected: This method already exists");
+                    throw new ApplicationException("Method already exists");
+                }else{
+                    Method newMethod = new Method(params.get(0));
+                    methods.add(newMethod);
+                    //adding parameters (if any)
+                    if(params.size() > 1){
+                        for(int i = 1; i<params.size(); i++){
+                            newMethod.addParams(params.get(i));
+                        }
+                    }
+                    //adding commnads
+                    for(int i = currentLine+1; i<lines.size(); i++){
+                        if(Objects.equals(lines.get(i), "endmethod")){
+                            break;
+                        }else{
+                            newMethod.addCommand(lines.get(i));
+                        }
+                    }
+                    currentLine+=newMethod.commands.size()+1;
+                    break;
+                }
             default:
                 if(checkIfVariableExists(command) ){
                     int index = vars.indexOf(new Variable(command));
                     Variable var = vars.get(index);
                     vars.set(index, var.updateVariable(params.get(0), params.get(1)));
+
+                }else if(checkIfMethodExists(command)){
+                    int index = methods.indexOf(new Method(command));
+                    Method method = methods.get(index);
+
+                    parseMethod(method);
 
                 }else{
                     gui.errorMessage.setText("Error detected: Entered command is not recognised");
@@ -220,13 +251,19 @@ public class Parser{
      */
 
      private boolean checkIfVariableExists(String name){
-         //return vars.contains(new Variable(name));
 
          for(Variable var : vars){
              if(Objects.equals(var.name, name)) return true;
          }
          return false;
      }
+    private boolean checkIfMethodExists(String name){
+
+        for(Method m : methods){
+            if(Objects.equals(m.name, name)) return true;
+        }
+        return false;
+    }
 
     /**
      * Private function that return int value of variable with provided name,
@@ -318,5 +355,13 @@ public class Parser{
                  break;
          }
          currentLine+=loop.commands.size()+1;
+     }
+
+     private void parseMethod(Method method) throws ApplicationException {
+         String[] commands = method.toString().split("\\r?\\n");
+
+         for(String c : commands){
+            parseCommand(c);
+         }
      }
 }
