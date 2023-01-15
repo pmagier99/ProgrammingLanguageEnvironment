@@ -14,9 +14,9 @@ public class Parser{
     HashMap<Integer, String> lines = new HashMap<>(); //stores all lines provided by the user
     List<Variable> vars = new ArrayList<>(); // stores all variables created
     ArrayList<String> params; // stores parameters of each command.
-    Loop loop; //instance of Loop
-    ifStatement ifStatement; //instance of if Statement
     List<Method> methods = new ArrayList<>(); //stores all methods created
+    ProgrammingCommandsFactory pcf = new ProgrammingCommandsFactory();
+    ProgrammingCommands pc;
     /**
      * A class constructor.
      * @param canvas the canvas from which drawn and non-drawn are taken
@@ -89,27 +89,26 @@ public class Parser{
                 }
                 break;
             case "while":
-                loop = new Loop(new LinkedList<>());
+                pc = pcf.getProgrammingCommands("LOOP", "");
                 for(int i = currentLine+1; i<lines.size(); i++){
                     if(Objects.equals(lines.get(i), "endloop")){
                         break;
                     }else{
-                        loop.addCommand(lines.get(i));
+                        pc.addCommand(lines.get(i));
                     }
                 }
 
-                if(loop.commands.size() != 0)
-                    parseWhile(loop.toString(), params.get(0), params.get(1), params.get(2));
+                if(pc.commands.size() != 0)
+                    parseWhile(pc.toString(), params.get(0), params.get(1), params.get(2));
 
                 break;
             case "if":
-                ifStatement = new ifStatement(new LinkedList<>());
-                ifStatement.flag = true;
+                pc = pcf.getProgrammingCommands("IFSTATEMENT", "");
                 for(int i = currentLine+1; i<lines.size(); i++){
                     if(Objects.equals(lines.get(i), "endif")){
                         break;
                     }else{
-                        ifStatement.addCommand(lines.get(i));
+                        pc.addCommand(lines.get(i));
                     }
                 }
                 parseIfStatement(params.get(0));
@@ -313,7 +312,7 @@ public class Parser{
      * @throws ApplicationException
      */
     private void parseIfStatement(String condition) throws ApplicationException {
-        String[] commands = ifStatement.toString().split("\\r?\\n");
+        String[] commands = pc.toString().split("\\r?\\n");
         String[] parameters = {"",""};
         int parametersIndex = 0;
         String operator = "";
@@ -349,10 +348,10 @@ public class Parser{
         }
 
 
-        if(ifStatement.checkCondition(parameter1, parameter2, operator) && ifStatement.commands.size() > 0){
+        if(pc.checkCondition(parameter1, parameter2, operator) && pc.commands.size() > 0){
             for(String c : commands) parseCommand(c);
         }
-        currentLine+=ifStatement.commands.size()+1;
+        currentLine+=pc.commands.size()+1;
     }
 
     /**
@@ -394,7 +393,7 @@ public class Parser{
                  }
                  break;
          }
-         currentLine+=loop.commands.size()+1;
+         currentLine+=pc.commands.size()+1;
      }
 
     /**
