@@ -7,7 +7,7 @@ import java.awt.*;
  * Also, it contains methods for drawing activities.
  */
 
-public class MyCanvas implements Commands{
+public class MyCanvas implements Commands {
 
     int xPos; int yPos;
     boolean fill;
@@ -56,6 +56,15 @@ public class MyCanvas implements Commands{
     public void drawOval(int size){
         g.setColor(c);
         new Oval(g, xPos, yPos, size, fill);
+        view.repaint();
+    }
+    /**
+     * Draws hexagon with the specified parameter
+     * @param size value of the size
+     */
+    public void drawHexagon(int size){
+        g.setColor(c);
+        new Hexagon(g, xPos, yPos,size,fill);
         view.repaint();
     }
 
@@ -131,12 +140,23 @@ public class MyCanvas implements Commands{
         xPos = 0; yPos = 0;
     }
 
+    /**
+     * Moves cursor to given x and y
+     * @param x - integer of x
+     * @param y - integer of y
+     */
+
     @Override
     public void moveTo(int x, int y) {
         cursor.moveCursor(g, xPos, yPos, x, y);
         view.repaint();
         xPos = x; yPos = y;
     }
+
+    /**
+     * Prints error message on the screen.
+     * @param error - string of messages that is displayed.
+     */
 
     public void printError(String error){
         g.setFont(g.getFont().deriveFont(12f));
