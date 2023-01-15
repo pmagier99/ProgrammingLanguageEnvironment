@@ -118,18 +118,18 @@ public class Parser{
                     gui.errorMessage.setText("Error detected: This method already exists. Line:" + currentLine);
                     throw new ApplicationException("Method already exists. Line:" + currentLine);
                 }else{
-                    Method newMethod = new Method(params.get(0).toLowerCase());
-                    methods.add(newMethod);
+                    pc = pcf.getProgrammingCommands("METHOD", params.get(0).toLowerCase());
+                    methods.add((Method) pc);
 
                     //adding commads
                     for(int i = currentLine+1; i<lines.size(); i++){
                         if(Objects.equals(lines.get(i), "endmethod")){
                             break;
                         }else{
-                            newMethod.addCommand(lines.get(i));
+                            pc.addCommand(lines.get(i));
                         }
                     }
-                    currentLine+=newMethod.commands.size()+1;
+                    currentLine+=pc.commands.size()+1;
                     break;
                 }
             case "endloop":
@@ -144,10 +144,10 @@ public class Parser{
 
                 }else if(checkIfMethodExists(command)){
                     int index = methods.indexOf(new Method(command));
-                    Method method = methods.get(index);
+                    pc = methods.get(index);
 
-                    if(method.commands.size() > 0)
-                        parseMethod(method);
+                    if(pc.commands.size() > 0)
+                        parseMethod((Method) pc);
 
                 }else if(params.size() == 2){ //create new variable
                     if(params.get(0) == "="){
