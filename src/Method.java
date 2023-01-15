@@ -1,17 +1,21 @@
 import java.util.LinkedList;
+
+/**
+ * A public class that extends ProgrammingCommands class
+ * This is used to create methods in program environment
+ */
 public class Method extends ProgrammingCommands{
 
     String name;
-    LinkedList<String> params;
 
+    /**
+     * Constructor that requires to provide name of the method
+     * that is executed once called.
+     * @param name the name for method
+     */
     public Method(String name){
         this.name = name;
-        params = new LinkedList<>();
-        commands = new LinkedList<>();
-    }
-
-    public void addParams(String param){
-        params.add(param);
+        commands = new LinkedList<String>();
     }
 
     @Override public boolean equals(Object obj) {

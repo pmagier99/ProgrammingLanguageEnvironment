@@ -66,4 +66,21 @@ abstract class Shapes {
 
         if(fill) g.fillPolygon(xArray, yArray, 3); else g.drawPolygon(xArray, yArray, 3);
     }
+
+    /**
+     * Draws the hexagon with the specified arguments.
+     *
+     * @param g Graphics g
+     * @param x the x position of where Hexagon will be drawn
+     * @param y the y position of where Hexagon will be drawn
+     * @param size the value of Hexagon's side
+     * @param fill the boolean value, for either filled or non-filled Triangle
+     */
+
+    public void drawHexagon(Graphics g, int x, int y, int size, boolean fill){
+        int[] xArray ={x, x+size, x+size+size/2, x+size, x, x-size/2};
+        int[] yArray ={y, y, y+size, y+size+size, y+size+size, y+size};
+
+        if(fill) g.fillPolygon(xArray, yArray, 6); else g.drawPolygon(xArray,yArray,6);
+    }
 }

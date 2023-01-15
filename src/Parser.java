@@ -49,6 +49,10 @@ public class Parser{
                 checkIfParametersAreValid(true, 1);
                 canvas.drawTriangle(Integer.parseInt(params.get(0)));
                 break;
+            case "hexagon":
+                checkIfParametersAreValid(true, 1);
+                canvas.drawHexagon(Integer.parseInt(params.get(0)));
+                break;
             case "drawto":
                 checkIfParametersAreValid(true, 2);
                 canvas.drawLine(Integer.parseInt(params.get(0)), Integer.parseInt(params.get(0)));
@@ -94,11 +98,13 @@ public class Parser{
                     }
                 }
 
-                parseWhile(loop.toString(), params.get(0), params.get(1), params.get(2));
+                if(loop.commands.size() != 0)
+                    parseWhile(loop.toString(), params.get(0), params.get(1), params.get(2));
 
                 break;
             case "if":
                 ifStatement = new ifStatement(new LinkedList<>());
+                ifStatement.flag = true;
                 for(int i = currentLine+1; i<lines.size(); i++){
                     if(Objects.equals(lines.get(i), "endif")){
                         break;
@@ -106,22 +112,17 @@ public class Parser{
                         ifStatement.addCommand(lines.get(i));
                     }
                 }
-                parseIfStatement(ifStatement.toString(), params.get(0));
+                parseIfStatement(params.get(0));
                 break;
             case "method":
                 if(checkIfMethodExists(params.get(0))){
                     gui.errorMessage.setText("Error detected: This method already exists. Line:" + currentLine);
                     throw new ApplicationException("Method already exists. Line:" + currentLine);
                 }else{
-                    Method newMethod = new Method(params.get(0));
+                    Method newMethod = new Method(params.get(0).toLowerCase());
                     methods.add(newMethod);
-                    //adding parameters (if any)
-                    if(params.size() > 1){
-                        for(int i = 1; i<params.size(); i++){
-                            newMethod.addParams(params.get(i));
-                        }
-                    }
-                    //adding commnads
+
+                    //adding commads
                     for(int i = currentLine+1; i<lines.size(); i++){
                         if(Objects.equals(lines.get(i), "endmethod")){
                             break;
@@ -132,12 +133,12 @@ public class Parser{
                     currentLine+=newMethod.commands.size()+1;
                     break;
                 }
-            case "endif":
             case "endloop":
+            case "endif":
             case "endmethod":
                 break;
             default:
-                if(checkIfVariableExists(command) ){
+                if(checkIfVariableExists(command) ){ //update variable
                     int index = vars.indexOf(new Variable(command));
                     Variable var = vars.get(index);
                     vars.set(index, var.updateVariable(params.get(0), params.get(1)));
@@ -146,8 +147,15 @@ public class Parser{
                     int index = methods.indexOf(new Method(command));
                     Method method = methods.get(index);
 
-                    parseMethod(method);
+                    if(method.commands.size() > 0)
+                        parseMethod(method);
 
+                }else if(params.size() == 2){ //create new variable
+                    if(params.get(0) == "="){
+                        Variable newVar = new Variable(params.get(0));
+                        newVar.setValue(params.get(1));
+                        vars.add(newVar);
+                    }
                 }else{
                     gui.errorMessage.setText("Error detected: Entered command is not recognised. Line:" + currentLine);
                     throw new ApplicationException("Invalid command. Line:" + currentLine);
@@ -181,6 +189,7 @@ public class Parser{
              lines.put(i, commands[i].toLowerCase());
          }
 
+         currentLine = 0;
          while(currentLine < lines.size()){
              parseCommand(lines.get(currentLine));
              currentLine++;
@@ -214,10 +223,11 @@ public class Parser{
      private void checkIfParametersAreValid(boolean requireInt, int parametersExpected) throws ApplicationException {
          if(parametersExpected == 0) return;
 
+         checkNumberOfParameters(parametersExpected, params.size());
          String first = params.get(0);
          String last = params.get(params.size()-1);
 
-         checkNumberOfParameters(parametersExpected, params.size());
+
 
          //converts any variables to its values
          if(checkIfVariableExists(first)){
@@ -264,6 +274,12 @@ public class Parser{
          }
          return false;
      }
+
+    /**
+     * Private function that checks if provided String name is also a name of existed method.
+     * @param name - name of Variable that needs to be checked for existence
+     * @return true if exists, false if it does not
+     */
     private boolean checkIfMethodExists(String name){
 
         for(Method m : methods){
@@ -293,12 +309,11 @@ public class Parser{
 
     /**
      * Private function to perform if Statement created by user in program.
-     * @param multiCommands - list of commands that needs to be executed if condition is true
      * @param condition - condition that needs to be true in order to perform provided commands
      * @throws ApplicationException
      */
-    private void parseIfStatement(String multiCommands, String condition) throws ApplicationException {
-        String[] commands = multiCommands.split("\\r?\\n");
+    private void parseIfStatement(String condition) throws ApplicationException {
+        String[] commands = ifStatement.toString().split("\\r?\\n");
         String[] parameters = {"",""};
         int parametersIndex = 0;
         String operator = "";
@@ -313,10 +328,28 @@ public class Parser{
         }
 
         //converts parameters to int, even if they are variable
-        int parameter1 = toInt(parameters[0]);
-        int parameter2 = toInt(parameters[1]);
+        String parameter1 = parameters[0];
+        String parameter2 = parameters[1];
 
-        if(ifStatement.checkCondition(parameter1, parameter2, operator)){
+        if(checkIfVariableExists(parameter1))
+            parameter1 = vars.get(vars.indexOf(new Variable(parameter1))).value;
+
+        if(checkIfVariableExists(parameter2))
+            parameter2 = vars.get(vars.indexOf(new Variable(parameter2))).value;
+
+
+        if(parameter1.matches(("[0-9]+")) && !parameter2.matches(("[0-9]+"))){
+            gui.errorMessage.setText("Error detected: Entered parameter is not recognised. Line:" + currentLine);
+            throw new ApplicationException("Invalid parameter detected. Line:" + currentLine);
+        }
+
+        if(!parameter1.matches(("[0-9]+")) && parameter2.matches(("[0-9]+"))){
+            gui.errorMessage.setText("Error detected: Entered parameter is not recognised. Line:" + currentLine);
+            throw new ApplicationException("Invalid parameter detected. Line:" + currentLine);
+        }
+
+
+        if(ifStatement.checkCondition(parameter1, parameter2, operator) && ifStatement.commands.size() > 0){
             for(String c : commands) parseCommand(c);
         }
         currentLine+=ifStatement.commands.size()+1;
@@ -364,6 +397,11 @@ public class Parser{
          currentLine+=loop.commands.size()+1;
      }
 
+    /**
+     * Private function that execute commands that were passed to given method
+     * @param method - Method that needs to be executed.
+     * @throws ApplicationException
+     */
      private void parseMethod(Method method) throws ApplicationException {
          String[] commands = method.toString().split("\\r?\\n");
 

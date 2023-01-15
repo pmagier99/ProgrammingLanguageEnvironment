@@ -6,7 +6,7 @@ import java.awt.*;
  */
 public class Triangle extends Shapes{
     /**
-     * Draws the oval using an abstract Graphics class
+     * Draws the triangle using an abstract Graphics class
      * @param g Graphics g
      * @param x the x position of where Triangle will be drawn
      * @param y the y position of where Triangle will be drawn

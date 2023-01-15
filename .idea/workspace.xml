@@ -5,16 +5,19 @@
     <option name="CUSTOM_SCOPE_NAME" value="Selected files" />
   </component>
   <component name="ChangeListManager">
-
-    <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="adding error messages to window app">
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="b3691a66-e511-4629-b853-79afc0412803" name="Changes" comment="creating Syntax checker">
+      <change afterPath="$PROJECT_DIR$/src/Hexagon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Loop.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Loop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Method.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Method.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyCanvas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyCanvas.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
-
+      <change beforePath="$PROJECT_DIR$/src/Shapes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Shapes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SyntaxChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SyntaxChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Tests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Triangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Variable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ifStatement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ifStatement.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,22 +52,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "last_opened_file_path": "/Users/piotrmagier/Desktop/uni/ase/project/ProgrammingLanguageEnvironment",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
@@ -79,7 +84,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TestClass">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ProgrammingLanguageEnvironment" />
@@ -87,53 +92,54 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyCanvasTest.TestCaseSensitivity" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestClass and 1 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProgrammingLanguageEnvironment" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MyCanvasTest" />
-      <option name="METHOD_NAME" value="TestCaseSensitivity" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass="TestClass" />
+        <pattern testClass="TestPartTwo" />
+      </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MyCanvasTest.TestNotEnoughArgs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ProgrammingLanguageEnvironment" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MyCanvasTest" />
-      <option name="METHOD_NAME" value="TestNotEnoughArgs" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MyCanvasTest.TestTooManyArgs" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ProgrammingLanguageEnvironment" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="MyCanvasTest" />
-      <option name="METHOD_NAME" value="TestTooManyArgs" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestClass" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestClass.TestNoParameters" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ProgrammingLanguageEnvironment" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="TestClass" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="TestNoParameters" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestPartTwo.TestLoopCommand" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProgrammingLanguageEnvironment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestPartTwo" />
+      <option name="METHOD_NAME" value="TestLoopCommand" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestPartTwo.testMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ProgrammingLanguageEnvironment" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="TestPartTwo" />
+      <option name="METHOD_NAME" value="testMethod" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestClass" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.TestClass" />
-        <item itemvalue="JUnit.MyCanvasTest.TestCaseSensitivity" />
-        <item itemvalue="JUnit.MyCanvasTest.TestTooManyArgs" />
-        <item itemvalue="JUnit.MyCanvasTest.TestNotEnoughArgs" />
+        <item itemvalue="JUnit.TestClass and 1 more" />
+        <item itemvalue="JUnit.TestPartTwo.TestLoopCommand" />
+        <item itemvalue="JUnit.TestPartTwo.testMethod" />
+        <item itemvalue="JUnit.TestClass.TestNoParameters" />
       </list>
     </recent_temporary>
   </component>
@@ -164,7 +170,24 @@
       <workItem from="1668764022610" duration="4483000" />
       <workItem from="1668770610273" duration="4743000" />
       <workItem from="1668777888990" duration="21572000" />
-      <workItem from="1670228709683" duration="451000" />
+      <workItem from="1670228709683" duration="7845000" />
+      <workItem from="1670237796910" duration="8724000" />
+      <workItem from="1670405396888" duration="18871000" />
+      <workItem from="1670853252448" duration="7599000" />
+      <workItem from="1670919452719" duration="2710000" />
+      <workItem from="1670938778353" duration="11427000" />
+      <workItem from="1670965456018" duration="3829000" />
+      <workItem from="1671006763602" duration="1161000" />
+      <workItem from="1671040329798" duration="5957000" />
+      <workItem from="1671092067331" duration="7525000" />
+      <workItem from="1671213394383" duration="5324000" />
+      <workItem from="1671264525204" duration="24020000" />
+      <workItem from="1671361841557" duration="3000" />
+      <workItem from="1671367429639" duration="2258000" />
+      <workItem from="1671453574475" duration="1493000" />
+      <workItem from="1671470233606" duration="1397000" />
+      <workItem from="1671474660194" duration="2000" />
+      <workItem from="1673787627063" duration="12909000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1668005312076</created>
@@ -187,7 +210,63 @@
       <option name="project" value="LOCAL" />
       <updated>1668795209189</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adding error messages to window app">
+      <created>1670229166881</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1670229166881</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Creating Variable system">
+      <created>1670409708475</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670409708475</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Creating Variable system part 2">
+      <created>1670409761270</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670409761270</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Creating Variable system part 2">
+      <created>1670409867151</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1670409867151</updated>
+    </task>
+    <task id="LOCAL-00008" summary="creating loop system">
+      <created>1670966496308</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1670966496308</updated>
+    </task>
+    <task id="LOCAL-00009" summary="creating ifStatements system">
+      <created>1671092764090</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671092764090</updated>
+    </task>
+    <task id="LOCAL-00010" summary="creating methods system">
+      <created>1671213696401</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1671213696402</updated>
+    </task>
+    <task id="LOCAL-00011" summary="creating Syntax checker">
+      <created>1671218382951</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1671218382951</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,7 +283,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="creating-flashing_colours" />
                       </list>
                     </value>
                   </entry>
@@ -223,9 +302,17 @@
     <MESSAGE value="creating tests" />
     <MESSAGE value="creating commands parser" />
     <MESSAGE value="adding error messages to window app" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding error messages to window app" />
+    <MESSAGE value="Creating Variable system" />
+    <MESSAGE value="Creating Variable system part 2" />
+    <MESSAGE value="creating loop system" />
+    <MESSAGE value="creating ifStatements system" />
+    <MESSAGE value="creating methods system" />
+    <MESSAGE value="creating Syntax checker" />
+    <option name="LAST_COMMIT_MESSAGE" value="creating Syntax checker" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ProgrammingLanguageEnvironment$TestPartTwo_TestUpdatingVariable.ic" NAME="TestPartTwo.TestUpdatingVariable Coverage Results" MODIFIED="1670954851862" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProgrammingLanguageEnvironment$TestClass_and_1_more.ic" NAME="TestClass and 1 more Coverage Results" MODIFIED="1670956358727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ProgrammingLanguageEnvironment$MyCanvasTest.ic" NAME="MyCanvasTest Coverage Results" MODIFIED="1668673915624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
